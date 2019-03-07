@@ -1,26 +1,43 @@
-####
-# Each team's file must define four tokens:
-#     team_name: a string
-#     strategy_name: a string
-#     strategy_description: a string
-#     move: A function that returns 'c' or 'b'
-####
+import random
 
-team_name = 'E0'
-strategy_name = 'Collude'
-strategy_description = 'Always collude.'
+team_name = 'Big bubbas'
+strategy_name = 'BBCC'
+strategy_description = '''\
+Random choice first round. If the opponent betrays in the first round, betray second round.If the opponent betrays in the first round, and we collide, betray second round. If the opponent collides in the first round, collide second round.
+Something else, collide'''
+
+def moveA(my_history, their_history, my_score, their_score):
+    if (my_score==0 and their_score==0) and ( ' ' in their_history[0]):
+        return random.choice['c','b'] 
+    elif (my_score==0 and their_score==0) and ('b' in their_history[-1]):
+        return 'b'
+    elif (my_score== -1 and their_score==3) and ( 'b' in their_history[-1]):
+        return 'b'
+    elif (my_score== 3 and their_score==-1) and ( 'c' in their_history[-1]):
+        return 'c'
+    else:
+        return 'c'
+
+team_name = 'Big bubbas'
+strategy_name = 'Idk'
+strategy_description = '''\
+Produces a random choice disregaurding their score or history'''
     
-def move(my_history, their_history, my_score, their_score):
-    '''Make my move based on the history with this player.
+def moveB(my_history, their_history, my_score, their_score):
     
-    history: a string with one letter (c or b) per round that has been played with this opponent.
-    their_history: a string of the same length as history, possibly empty. 
-    The first round between these two players is my_history[0] and their_history[0]
-    The most recent round is my_history[-1] and their_history[-1]
+    return random.choice(['c','b'])
     
-    Returns 'c' or 'b' for collude or betray.
-    '''
-    
-    # This player always colludes.
-    return 'c'
+team_name = 'Big bubbas'
+strategy_name = 'Friends with Benefits'
+strategy_description = '''\
+If the opponent collides, we collide. If the opponent betrays, betray'''
+
+def moveC(my_history, their_history, my_score, their_score):
+  
+    if 'c' in (their_history): 
+        return 'c'
+    elif 'b' in (their_history): 
+        return 'b'
+    else:
+        return 'c'
     

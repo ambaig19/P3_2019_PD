@@ -103,7 +103,7 @@ def play_iterative_rounds(player1, player2):
     Plays a random number of rounds (between 100 and 200 rounds) 
     of the iterative prisoners' dilemma between two strategies.
     player1 and player2 are modules.
-    Returns 4-tuple, for example ('cc', 'bb', -200, 600) 
+    Returns 4-tuple, for example ('cc', 'bb', -5, 50) 
     but with much longer strings 
     '''
     number_of_rounds = random.randint(100, 200)
@@ -124,15 +124,15 @@ def play_round(player1, player2, score1, score2, moves1, moves2):
     Returns a 2-tuple with score1 and score2 incremented by this round
     '''
     
-    RELEASE = 0 # (R, "reward" in literature) when both players collude
-    TREAT = 100 # (T, "temptation" in literature) when you betray your partner
-    SEVERE_PUNISHMENT = -500 # (S, "sucker" in literature) when your partner betrays you
-    PUNISHMENT = -250 # (P) when both players betray each other
+    RELEASE = 2 # (R, "reward" in literature) when both players collude
+    TREAT = 3 # (T, "temptation" in literature) when you betray your partner
+    SEVERE_PUNISHMENT = -1 # (S, "sucker" in literature) when your partner betrays you
+    PUNISHMENT = 0 # (P) when both players betray each other
     
     # Keep T > R > P > S to be a Prisoner's Dilemma
     # Keep 2R > T + S to be an Iterative Prisoner's Dilemma
     
-    ERROR = -250
+    ERROR = 0
     
     # Get the two players' actions and remember them.
     action1 = player1.move(moves1, moves2, score1, score2)
@@ -224,9 +224,9 @@ def make_section1(modules, scores):
     ----------------------------------------------------------------------------
     A column shows pts/round earned against each other player:      
                 P0    P1         
-    vs. P0 :     0   100          
-    vs. P1 :  -500     0             
-    TOTAL  :  -500   100
+    vs. P0 :   0     3          
+    vs. P1 :  -1     2             
+    TOTAL  :  -1     3
     '''
     # First line
     section1 = '-'*80+'\nSection 1 - Player vs. Player\n'+'-'*80+'\n'
@@ -256,8 +256,8 @@ def make_section2(modules, scores):
     ----------------------------------------------------------------------------
     Average points per round:
     Team name (P#):  Score       with strategy name
-    Champ10nz (P0):   100 points with Loyal
-    Rockettes (P1):  -500 points with Backstabber
+    Champ10nz (P0):   3 points with Loyal
+    Rockettes (P1):  -1 points with Backstabber
     ''' 
     section2 = '-'*80+'\nSection 2 - Leaderboard\n'+'-'*80+'\n'
     section2 += 'Average points per round:\n'
@@ -273,7 +273,7 @@ def make_section2(modules, scores):
     section2_list.sort(key=lambda x: int(x[2]), reverse=True)
     
     # Generate one string per team
-    # Rockettes (P1):  -500 points with Backstabber
+    # Rockettes (P1):  -1 points with Backstabber
     for team in section2_list:
         team_name, Pn, n_points, strategy_name = team
         section2 += '{:<10}({}): {:>10} points with {:<40}\n'.format(team_name[:10], Pn, n_points, strategy_name[:40])                       
@@ -282,7 +282,7 @@ def make_section2(modules, scores):
 def make_section3(modules, moves, scores, index):
     '''Return a string with information for the player at index, like:
     ----------------------------------------------------------------------------
-    Section 3 - Game Data for Team Colloid c=-500 b=-250 C=0 B=+100
+    Section 3 - Game Data for Team Colloid c=-1 b=0 C=2 B=3
     ----------------------------------------------------------------------------
     -133 pt/round: Colloid (P6) "Collude every 3rd round"
     -233 pt/round: 2PwnU (P8) "Betray, then alternate"
@@ -372,7 +372,7 @@ def post_to_file(string, filename='tournament.txt', directory=''):
         directory = os.path.dirname(os.path.abspath(__file__))  
     # Name the file tournament.txt
     filename = os.path.join(directory, filename)
-    # Create the file for the round-by-round results
+    # Create the file for the round-by-round resultsplay_
     filehandle = open(filename,'w')
     filehandle.write(string)
  
