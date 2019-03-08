@@ -11,9 +11,9 @@ def moveA(my_history, their_history, my_score, their_score):
         return random.choice['c','b'] 
     elif (my_score==0 and their_score==0) and ('b' in their_history[-1]):
         return 'b'
-    elif (my_score== -1 and their_score==3) and ( 'b' in their_history[-1]):
+    elif (my_score== -100 and their_score==300) and ( 'b' in their_history[-1]):
         return 'b'
-    elif (my_score== 3 and their_score==-1) and ( 'c' in their_history[-1]):
+    elif (my_score== 300 and their_score==-100) and ( 'c' in their_history[-1]):
         return 'c'
     else:
         return 'c'
