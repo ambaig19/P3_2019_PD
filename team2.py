@@ -30,7 +30,7 @@ team_name = 'Big bubbas'
 strategy_name = 'Friends with Benefits'
 strategy_description = '''\If the opponent collides, we collide. If the opponent betrays, betray'''
 
-def moveC(my_history, their_history, my_score, their_score):
+def move(my_history, their_history, my_score, their_score):
   
     if 'c' in (their_history): 
         return 'c'
